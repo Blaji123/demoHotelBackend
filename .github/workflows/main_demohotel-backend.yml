@@ -34,20 +34,29 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: java-app
-      
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses : azure/docker-login@v1
         with:
-          app-name: 'demohotel-backend'
-          slot-name: 'Production'
-          package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_55B796DDDE234745937EF915F26D249C }}
+          login-server : demohotelregistry.azurecr.io
+          username : demohotelregistry
+          password : aO0BN9sHmiKDzqeq29h0kdoVO8vzthJBS8MvnR8QbX+ACRDFOYej
+        -run: |
+          docker build . -t demohotelregistry.azurecr.io/demohotelregistry:latest
+          docker push demohotelregistry.azurecr.io/demohotelregistry:latest
+
+
+#      - name: Deploy to Azure Web App
+#        id: deploy-to-webapp
+#        uses: azure/webapps-deploy@v2
+#        with:
+#          app-name: 'demohotel-backend'
+#          slot-name: 'production'
+#          package: '*.jar'
+#          publish-profile: ${{ secrets.AzureAppService_PublishProfile_d88109b4856d4cf4af73475b2bca0252 }}
