@@ -48,7 +48,7 @@ jobs:
             username : demohotelregistry
             password : aO0BN9sHmiKDzqeq29h0kdoVO8vzthJBS8MvnR8QbX+ACRDFOYej
         - run: |
-            docker build . -t demohotelregistry.azurecr.io/demohotelregistry:latest
+            docker build ${{ github.workspace }}/target/*.jar -t demohotelregistry.azurecr.io/demohotelregistry:latest
             docker push demohotelregistry.azurecr.io/demohotelregistry:latest
 
 
