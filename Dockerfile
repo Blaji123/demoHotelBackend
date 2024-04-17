@@ -16,7 +16,7 @@ RUN mvn clean package
 
 FROM eclipse-temurin:21-jdk-alpine
 
-ARG JAR_NAME="ielectrify-1.0"
+ARG JAR_NAME="lakeSide-hotel-0.0.1-SNAPSHOT"
 
 WORKDIR /usr/src/app
 
