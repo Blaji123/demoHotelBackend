@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -31,25 +31,25 @@ jobs:
           path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: java-app
-        uses : azure/docker-login@v1
-        with:
-          login-server : demohotelregistry.azurecr.io
-          username : demohotelregistry
-          password : aO0BN9sHmiKDzqeq29h0kdoVO8vzthJBS8MvnR8QbX+ACRDFOYej
-        -run: |
-          docker build . -t demohotelregistry.azurecr.io/demohotelregistry:latest
-          docker push demohotelregistry.azurecr.io/demohotelregistry:latest
+#      - name: Download artifact from build job
+        - uses: actions/download-artifact@v3
+          with:
+            name: java-app
+        - uses : azure/docker-login@v1
+          with:
+            login-server : demohotelregistry.azurecr.io
+            username : demohotelregistry
+            password : aO0BN9sHmiKDzqeq29h0kdoVO8vzthJBS8MvnR8QbX+ACRDFOYej
+        - run: |
+            docker build . -t demohotelregistry.azurecr.io/demohotelregistry:latest
+            docker push demohotelregistry.azurecr.io/demohotelregistry:latest
 
 
 #      - name: Deploy to Azure Web App
