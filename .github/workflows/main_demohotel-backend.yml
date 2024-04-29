@@ -16,9 +16,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: azure/docker-login@v1
         with:
-          login-server : demohotelregistry.azurecr.io
-          username : demohotelregistry
-          password : aO0BN9sHmiKDzqeq29h0kdoVO8vzthJBS8MvnR8QbX+ACRDFOYej
+          login-server : demohotel123.azurecr.io
+          username : demohotel123
+          password : W3E30T2y152AL6clLbnwXsYEGfwuvjYLn67a68kxJB+ACRB34DtG
       - run: |
-          docker build . -t demohotelregistry.azurecr.io/demohotelregistry:latest
-          docker push demohotelregistry.azurecr.io/demohotelregistry:latest
+          docker build . -t demohotel123.azurecr.io/demohotel123:latest
+          docker push demohotel123.azurecr.io/demohotel123:latest
