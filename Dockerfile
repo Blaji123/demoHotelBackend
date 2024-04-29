@@ -22,9 +22,4 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app/target/${JAR_NAME}.jar ./app.jar
 
-ENV MONGO_DATABASE=""
-ENV MONGO_USER=""
-ENV MONGO_PASSWORD=""
-ENV MONGO_CLUSTER=""
-
 CMD ["java","-jar", "./app.jar"]
